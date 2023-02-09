@@ -22,9 +22,15 @@ const router = (req, res, next) => {
       res.end('404 Not Found')
     }
   }
-  
-  
 }
-http.createServer(router).listen(3000)
 
-console.log('escuchando en el puerto 3000')
+const server = http.createServer(router)
+const PORT = 3000
+server.listen(PORT, (err) => {
+  if(err) {
+    console.info('Could not establish a connection to the server')
+    console.error(err.message)
+  }
+  console.info(`> 🚀 Server listening on \http://localhost:${PORT}`)
+
+})
