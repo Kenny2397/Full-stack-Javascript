@@ -19,4 +19,13 @@ NOMBRE=kENNY node 02-entorno.js
 # 4.-Herramientas para ser más felices: Nodemon y PM2
 npm install -g nodemon
 pm2 para produccion
+# Procesos hijo
+El módulo de procesos secundarios de Node.js (child_process) tiene dos funciones spawn y exec, mediante las cuales podemos iniciar un proceso secundario para ejecutar otros programas en el sistema.
+
+La diferencia más significativa entre child_process.spawn y child_process.exec está en lo que spawn devuelve un stream y exec devuelve un buffer.
+
+Usa spawn cuando quieras que el proceso hijo devuelva datos binarios enormes a Node.
+Usa exec cuando quieras que el proceso hijo devuelva mensajes de estado simples.
+Usa spawn cuando quieras recibir datos desde que el proceso arranca.
+Usa exec cuando solo quieras recibir datos al final de la ejecución.
 
