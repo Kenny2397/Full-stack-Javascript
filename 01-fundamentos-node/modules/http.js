@@ -12,7 +12,8 @@ const router = (req, res, next) => {
     }
     case '/hola': {
       res.writeHead(201, { 'Content-type': 'text/plain' })
-      res.write('Hola ya se utilizar http de node.js')
+      const saludo = Saludar()
+      res.write(saludo)
       res.end()
       break
     }
@@ -24,6 +25,9 @@ const router = (req, res, next) => {
   }
 }
 
+function Saludar (){
+  return 'Hola mundo saludo'
+}
 const server = http.createServer(router)
 const PORT = 3000
 server.listen(PORT, (err) => {
