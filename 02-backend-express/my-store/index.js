@@ -2,12 +2,17 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT | 3000;
 
+const RouterApi = require('./routes')
+
+
 app.get("/", (req, res) =>{
   res.send("Hola mi server en Express");
 });
 
+RouterApi(app)
+
 app.listen(PORT, (err) => {
-  if(err) {
+if(err) {
     console.info('Could not establish a connection to the server')
     console.error(err.message)
   }
