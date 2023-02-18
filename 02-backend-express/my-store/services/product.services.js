@@ -1,4 +1,5 @@
 const faker = require('faker')
+const boom = require('@hapi/boom')
 class ProductService {
 
   constructor() {
@@ -14,33 +15,49 @@ class ProductService {
         name: faker.commerce.productName(),
         price: parseInt(faker.commerce.price(), 10),
         image: faker.image.imageUrl(),
+        isBlock: faker.datatype.boolean()
       })
     }
   }
 
-  create({name, price, image}) {
+  async create(data) {
+    const product = this.products.find(product => product.name === data.name)
+    if(product){
+      throw boom.conflict('El nombre del producto ya se encuentra registrado')
+    }
     const newProduct = {
       id: faker.datatype.uuid(),
-      name,
-      price,
-      image
+      ...data
     }
     this.products.push(newProduct)
     return newProduct
   }
+
   find() {
-    return this.products
+    return new Promise( (resolve) => {
+      setTimeout(() => {
+        resolve(this.products)
+      }, 3000)
+    })
   }
 
-  findOne(productId) {
-    const product = this.products.find(p => p.id = productId)
+  async findOne(productId) {
+    const product = this.products.find(p => p.id === productId)
+    console.log(product)
+    if(!product){
+      throw boom.notFound('No se encontró el producto')
+    }
+    if(product.isBlock){
+      throw boom.conflict('El producto está bloqueado')
+    }
     return product
   }
 
-  update(productId, data, next) {
-    const productIndex = this.products.findIndex(p => p.id = productId)
-    if(productIndex == -1){
-      next('No se encontró producto')
+  async update(productId, data) {
+    const productIndex = this.products.findIndex(p => p.id === productId)
+    // console.log(productIndex)
+    if(productIndex === -1){
+      throw boom.notFound('No se encontró el producto')
     }
     const product = this.products[productIndex]
     const updatedProduct = {
@@ -51,10 +68,10 @@ class ProductService {
     return updatedProduct
   }
 
-  delete(productId, next) {
+  async delete(productId) {
     const productIndex = this.products.findIndex(p => p.id = productId)
     if(productIndex == -1){
-      next('No se encontró producto')
+      throw boom.notFound('No se encontró producto')
     }
     this.product.splice(productIndex, 1)
     return {productIndex}
