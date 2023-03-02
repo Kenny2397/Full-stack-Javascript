@@ -5,13 +5,14 @@ const { models } = require('./../libs/sequelize')
 
 class UserService {
 
-  constructor(){
+  constructor() {
     this.pool = pool
     this.pool.on('error', err => console.error(err))
   }
 
-  async create() {
-
+  async create(body) {
+    const rta = await models.User.create(body)
+    return rta
   }
 
   async find() {
@@ -21,40 +22,49 @@ class UserService {
     return rta
   }
 
-  async findOne(productId) {
-    const product = this.products.find(p => p.id === productId)
-    console.log(product)
-    if(!product){
-      throw boom.notFound('No se encontró el producto')
+  async findOne(userId) {
+    // const product = this.products.find(p => p.id === productId)
+    // console.log(product)
+    // if(!product){
+    //   throw boom.notFound('No se encontró el producto')
+    // }
+    // if(product.isBlock){
+    //   throw boom.conflict('El producto está bloqueado')
+    // }
+    const user = await models.User.findOne(userId)
+    if (!user) {
+      throw boom.conflict('User not found!')
     }
-    if(product.isBlock){
-      throw boom.conflict('El producto está bloqueado')
-    }
-    return product
+    return user
   }
 
-  async update(productId, data) {
-    const productIndex = this.products.findIndex(p => p.id === productId)
-    // console.log(productIndex)
-    if(productIndex === -1){
-      throw boom.notFound('No se encontró el producto')
-    }
-    const product = this.products[productIndex]
-    const updatedProduct = {
-      ...product,
-      ...data
-    }
-    this.products[productIndex] = updatedProduct
-    return updatedProduct
+  async update(userId, data) {
+    // const productIndex = this.products.findIndex(p => p.id === productId)
+    // // console.log(productIndex)
+    // if (productIndex === -1) {
+    //   throw boom.notFound('No se encontró el producto')
+    // }
+    // const product = this.products[productIndex]
+    // const updatedProduct = {
+    //   ...product,
+    //   ...data
+    // }
+    // this.products[productIndex] = updatedProduct
+
+    const userUpdated = await models.User.update(userId, data)
+    return userUpdated
   }
 
-  async delete(productId) {
-    const productIndex = this.products.findIndex(p => p.id = productId)
-    if(productIndex == -1){
-      throw boom.notFound('No se encontró producto')
-    }
-    this.product.splice(productIndex, 1)
-    return {productIndex}
+  async delete(userId) {
+    // const productIndex = this.products.findIndex(p => p.id = productId)
+    // if (productIndex == -1) {
+    //   throw boom.notFound('No se encontró producto')
+    // }
+    // this.product.splice(productIndex, 1)
+    const user = await models.User.findOne(userId)
+    await user.destroy()
+
+    return userId
   }
 }
 
