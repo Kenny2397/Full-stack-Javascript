@@ -18,7 +18,6 @@ const {
 
 // handler validate query params and body param
 const { validatorHandler } = require('./../middlewares/validator.handler')
-const setupModels = require('../db/models')
 
 /**
  * ROUTES
