@@ -11,6 +11,17 @@ class UserService {
   }
 
   async create(body) {
+    const userEmail = body.email
+
+    const userAlredyExist = await models.User.findOne({
+      where: {
+        email: userEmail
+      }
+    })
+    console.log("***********" + userAlredyExist)
+    if (userAlredyExist !== null) {
+      throw boom.conflict('User with email is already exist!')
+    }
     const rta = await models.User.create(body)
     return rta
   }
@@ -31,7 +42,8 @@ class UserService {
     // if(product.isBlock){
     //   throw boom.conflict('El producto está bloqueado')
     // }
-    const user = await models.User.findOne(userId)
+    const user = await models.User.findByPk(userId)
+    console.log("----" + user)
     if (!user) {
       throw boom.conflict('User not found!')
     }
@@ -51,7 +63,13 @@ class UserService {
     // }
     // this.products[productIndex] = updatedProduct
 
-    const userUpdated = await models.User.update(userId, data)
+    const userUpdated = await models.User.update({
+      ...data
+    }, {
+      where: {
+        id: userId
+      }
+    })
     return userUpdated
   }
 
@@ -61,10 +79,19 @@ class UserService {
     //   throw boom.notFound('No se encontró producto')
     // }
     // this.product.splice(productIndex, 1)
-    const user = await models.User.findOne(userId)
-    await user.destroy()
 
-    return userId
+    const user = await models.User.findByPk(userId)
+
+    if (!user) {
+      throw boom.conflict('User not found')
+    }
+
+    await models.User.destroy({
+      where: {
+        id: userId
+      }
+    })
+    return 1
   }
 }
 

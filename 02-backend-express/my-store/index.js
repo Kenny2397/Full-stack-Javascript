@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 3000;
 
 
 // Import middlewares errors, logs
-const { LogErrors, BoomErrorHandler, ErrorHandler } = require('./middlewares/error.handler')
+const { LogErrors, BoomErrorHandler, OrmErrorHandler, ErrorHandler } = require('./middlewares/error.handler')
 
 app.use(express.json(true), express.urlencoded({ extended: true }))
 const RouterApi = require('./routes')
@@ -35,6 +35,7 @@ RouterApi(app)
 // Use middlewares
 app.use(LogErrors)
 app.use(BoomErrorHandler)
+app.use(OrmErrorHandler)
 app.use(ErrorHandler)
 
 app.listen(PORT, (err) => {

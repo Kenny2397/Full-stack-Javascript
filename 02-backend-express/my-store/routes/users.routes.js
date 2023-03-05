@@ -18,6 +18,7 @@ const {
 
 // handler validate query params and body param
 const { validatorHandler } = require('./../middlewares/validator.handler')
+const setupModels = require('../db/models')
 
 /**
  * ROUTES
@@ -41,6 +42,7 @@ router.get('/:id',
   async (req, res, next) => {
     try {
       const { id } = req.params
+      console.log(id)
       const response = await userService.findOne(id)
       res.status(200).json({
         data: response
@@ -50,7 +52,7 @@ router.get('/:id',
     }
   })
 
-/** Create User */
+/** CREATE USER */
 router.post('/',
   validatorHandler(createUserSchema, 'body'),
   async (req, res, next) => {
@@ -74,6 +76,7 @@ router.patch('/:id',
     try {
       const { id } = req.params
       const body = req.body
+      console.log(id, body)
       const userUpdated = await userService.update(id, body)
       res.status(200).json(userUpdated)
     } catch (error) {
@@ -89,7 +92,11 @@ router.delete('/:id',
     try {
       const { id } = req.params;
       await userService.delete(id);
-      res.status(201).json({id});
+      // console.log(id)
+      res.status(200).json({
+        "message": "User removed",
+        id
+      });
     } catch (error) {
       next(error);
     }
