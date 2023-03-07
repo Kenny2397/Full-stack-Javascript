@@ -29,7 +29,9 @@ class UserService {
   async find() {
     // const query = 'SELECT * FROM TASKS'
     // const [data, metadata] = await sequelize.query(query)
-    const rta = models.User.findAll()
+    const rta = models.User.findAll({
+      include: ['customer']
+    })
     return rta
   }
 
