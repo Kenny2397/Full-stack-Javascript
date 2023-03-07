@@ -11,7 +11,7 @@ const {
   createProductSchema,
   updateProductSchema,
   findOneProductSchema
-} = require('./../schemas/product.schemas')
+} = require('./../schemas/product.schema')
 
 // validator handler
 const { validatorHandler } = require('./../middlewares/validator.handler')

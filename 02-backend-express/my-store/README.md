@@ -15,3 +15,5 @@ exit terminal: exit
 
 docker ps
 docker inspect IDIMAGE
+
+Al iniciar postgres borrar tablas y realizar migracion
