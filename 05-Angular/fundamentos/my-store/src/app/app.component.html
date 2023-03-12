@@ -1,3 +1,9 @@
+<div class="box" (scroll)="onScroll($event)">
+  <p>{{person.name}}</p>
+</div>
+<input type="text" (keyup)="changeName($event)" >
+
+
 <p>Eventos</p>
 <button [disabled]="btnDisabled">botón</button>
 <button (click)="toggleButton()" >Toogle button</button>
