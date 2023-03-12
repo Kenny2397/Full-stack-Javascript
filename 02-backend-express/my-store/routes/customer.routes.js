@@ -10,6 +10,7 @@ const customerService = new CustomerService()
 
 const {
   createCustomerSchema,
+  createByIdUserCustomerSchema,
   updateCustomerSchema,
   getCustomerSchema
 } = require('./../schemas/customer.schema')
@@ -65,7 +66,25 @@ router.post('/',
     catch (error) {
       next(error)
     }
-  })
+  }
+)
+
+/** CREATE Customer by idUser */
+router.post('/id',
+  validatorHandler(createByIdUserCustomerSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const body = req.body
+      const newCustomer = await customerService.createByIdUser(body)
+      res.status(200).json({
+        response: newCustomer
+      })
+    }
+    catch (error) {
+      next(error)
+    }
+  }
+)
 
 /** UPDATE Customer */
 router.patch('/:id',
