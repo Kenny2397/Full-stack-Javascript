@@ -33,3 +33,8 @@ Lanzar servidor de desarrollo y que abra el navegador automáticamente:ng serve 
 Lanzar el servidor en un puerto especifico: ng serve -o --port=3500
 
 Si lanzamos el comando ng version desde la carpeta del proyecto podremos obtener mayor detalle de las tecnolog[ias utilizadas.
+
+## string interpolation vs Property binding
+
+Ambos son similares si se manejan datos string, pero lo recomendable para objetos es property binding
+
