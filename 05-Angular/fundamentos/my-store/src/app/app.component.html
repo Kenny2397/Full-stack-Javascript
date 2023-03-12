@@ -1,5 +1,17 @@
+<p>NgModule</p>
+
+<p>{{person.name}}</p>
+<input type="text" required #nameInput="ngModel" [(ngModel)]="person.name" />
+<p>Valid: {{ nameInput.valid }}</p>
+
+<p>{{person.age}}</p>
+<input type="number" required max="18" min="10" #ageInput="ngModel" [(ngModel)]="person.age" />
+<p>Valid: {{ ageInput.valid }}</p>
+
+<hr>
+
 <div class="box" (scroll)="onScroll($event)">
-  <p>{{person.name}}</p>
+
 </div>
 <input type="text" (keyup)="changeName($event)" >
 
