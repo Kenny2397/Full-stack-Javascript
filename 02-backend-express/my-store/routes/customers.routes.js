@@ -13,12 +13,12 @@ const {
   createByIdUserCustomerSchema,
   updateCustomerSchema,
   getCustomerSchema
-} = require('./../schemas/customer.schema')
+} = require('../schemas/customer.schema')
 
 // middlewares
 
 // handler validate query params and body param
-const { validatorHandler } = require('./../middlewares/validator.handler')
+const { validatorHandler } = require('../middlewares/validator.handler')
 
 /**
  * ROUTES
@@ -119,7 +119,7 @@ router.delete('/:id',
       next(error);
     }
   }
-);
+)
 
 
 module.exports = router

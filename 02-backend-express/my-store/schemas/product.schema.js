@@ -4,7 +4,7 @@ const id = joi.string().uuid()
 const name = joi.string().min(3).max(15)
 const price = joi.number().min(10).max(15000)
 const image = joi.string().uri()
-const isBlock = joi.boolean()
+
 
 const createProductSchema = joi.object({
   name: name.required(),
