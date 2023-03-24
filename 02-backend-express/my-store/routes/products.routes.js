@@ -10,13 +10,12 @@ const productService = new ProductService()
 const {
   createProductSchema,
   updateProductSchema,
-  findOneProductSchema
+  findOneProductSchema,
+  deleteProductSchema
 } = require('./../schemas/product.schema')
 
 // validator handler
 const { validatorHandler } = require('./../middlewares/validator.handler')
-
-
 
 // middleware that is specific to this router
 router.use((req, res, next) => {
@@ -105,7 +104,8 @@ router.patch('/:id',
   })
 
 // delete product
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', validatorHandler(deleteProductSchema, 'params'),
+async (req, res, next) => {
   try {
     const { id } = req.params
     const index = await productService.delete(id, next)

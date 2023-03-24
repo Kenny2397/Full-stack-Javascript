@@ -5,28 +5,31 @@ const title = Joi.string().min(3)
 const description = Joi.string().min(3).max(250)
 const image = Joi.string()
 
-const createCategory = Joi.object({
+const createCategorySchema = Joi.object({
+  title: title.required(),
+  description: description.required(),
+  image: image
+})
+
+const findCategorySchema = Joi.object({
+  id: id.required(),
+})
+const updateCategorySchema = Joi.object({
   id: id.required(),
   title: title.required(),
   description: description.required(),
   image: image
 })
 
-const updateCategory = Joi.object({
-  id: id.required(),
-  title: title.required(),
-  description: description.required(),
-  image: image
-})
-
-const deleteCategory = Joi.object({
+const deleteCategorySchema = Joi.object({
   id: id.required(),
 })
 
 module.exports = {
-  createCategory,
-  updateCategory,
-  deleteCategory
+  createCategorySchema,
+  updateCategorySchema,
+  deleteCategorySchema,
+  findCategorySchema
 }
 
 

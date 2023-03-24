@@ -1,16 +1,18 @@
 const faker = require('faker')
 const boom = require('@hapi/boom')
 
-const pool = require('./../libs/postgres.pool')
+// const pool = require('./../libs/postgres.pool')
+
+const { models } = require('./../libs/sequelize')
 class ProductService {
 
   constructor() {
-    this.products = []
-    this.generate()
-    this.pool = pool
-    this.pool.on('error', (err) => {
-      console.error(err)
-    })
+    // this.products = []
+    // this.generate()
+    // this.pool = pool
+    // this.pool.on('error', (err) => {
+    //   console.error(err)
+    // })
   }
 
   generate() {
@@ -27,27 +29,15 @@ class ProductService {
   }
 
   async create(data) {
-    const product = this.products.find(product => product.name === data.name)
-    if(product){
-      throw boom.conflict('El nombre del producto ya se encuentra registrado')
-    }
-    const newProduct = {
-      id: faker.datatype.uuid(),
-      ...data
-    }
-    this.products.push(newProduct)
-    return newProduct
+    const newProduct = await models.Product.create(data);
+    return newProduct;
   }
 
   async find() {
-    const query = 'SELECT * FROM TASKS'
-    const response = await this.pool.query(query)
-    return response.rows
-    // return new Promise( (resolve) => {
-    //   setTimeout(() => {
-    //     resolve(this.products)
-    //   }, 3000)
-    // })
+    const products = await models.Product.findAll({
+      include: ['category'],
+    });
+    return products;
   }
 
   async findOne(productId) {
