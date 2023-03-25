@@ -29,6 +29,7 @@ router.get('/', async (req, res, next) => {
   try {
     const response = await customerService.find()
     res.status(200).json({
+      size: response.length,
       data: response
     })
   } catch (error) {

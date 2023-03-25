@@ -55,7 +55,9 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/add-item',
+// ADD ITEM
+
+router.post('/add-item',
   validatorHandler(addItemSchema, 'body'),
   async (req, res, next) => {
     try {
