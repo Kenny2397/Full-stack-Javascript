@@ -44,7 +44,7 @@ router.get('/:id',
 // ALL ORDERS
 router.get('/', async (req, res, next) => {
   try {
-    const orders = await orderService.find()
+    const orders = await orderService.find(req.query)
     res.status(200).json({
       size: orders.length || 0,
       data: orders

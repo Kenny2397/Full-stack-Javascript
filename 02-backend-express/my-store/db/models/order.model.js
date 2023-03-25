@@ -28,7 +28,23 @@ const OrderSchema = {
 		field: 'created_at',
 		defaultValue: Sequelize.NOW,
 	},
-};
+  subtotal: {
+    allowNull: false,
+    type: DataTypes.VIRTUAL,
+    get() {
+      if (this.items.length > 0) {
+        let subtotal = this.items.reduce( (accumulator, currentValue) => {
+          const price = currentValue.price
+          const amount = currentValue.OrderProduct.amount
+          return accumulator + price * amount
+        }, 0)
+        return subtotal
+      }
+      return 0
+    }
+  }
+
+}
 
 class Order extends Model {
 	static associate(models) {

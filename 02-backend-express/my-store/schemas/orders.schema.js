@@ -21,8 +21,10 @@ const addItemSchema = Joi.object({
   amount: amount.required(),
 });
 
+
+
 module.exports = {
 	getOrderSchema,
 	createOrderSchema,
-  addItemSchema
+  addItemSchema,
 }

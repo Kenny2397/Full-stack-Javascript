@@ -11,7 +11,8 @@ const {
   createProductSchema,
   updateProductSchema,
   findOneProductSchema,
-  deleteProductSchema
+  deleteProductSchema,
+  limitOffsetSchema
 } = require('./../schemas/product.schema')
 
 // validator handler
@@ -39,9 +40,11 @@ router.get('/filter', async (req, res, next) => {
 
 
 // all of products
-router.get('/', async (req, res, next) => {
+router.get('/',
+  validatorHandler(limitOffsetSchema, 'query'),
+  async (req, res, next) => {
   try {
-    const products = await productService.find()
+    const products = await productService.find(req.query)
     res.status(200).json({
       size: products.length || 0,
       data: products
