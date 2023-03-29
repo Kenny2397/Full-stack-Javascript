@@ -1,5 +1,5 @@
 
-function CustomError() {
+function CustomError () {
   return (err, req, res, next) => {
     if (err.type === 'entity.parse.failed') {
       next('Bad json file')
@@ -8,6 +8,6 @@ function CustomError() {
   }
 }
 
-  module.exports = {
-    CustomError
-  }
+module.exports = {
+  CustomError
+}

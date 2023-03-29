@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const { createCategorySchema,
+const {
+  createCategorySchema,
   updateCategorySchema,
   deleteCategorySchema,
   findCategorySchema
@@ -31,51 +32,50 @@ router.get('/', async (req, res, next) => {
 router.get('/:id',
   validatorHandler(findCategorySchema, 'params'),
   async (req, res, next) => {
-  try {
-    const response = await categoryService.findOne(req.params.id)
-    res.status(200).json({
-      response
-    })
-  } catch (error) {
-    next(error)
-  }
-})
+    try {
+      const response = await categoryService.findOne(req.params.id)
+      res.status(200).json({
+        response
+      })
+    } catch (error) {
+      next(error)
+    }
+  })
 // CREATE CATEGORY
 router.post('/', validatorHandler(createCategorySchema, 'body'),
   async (req, res, next) => {
-  try {
-    const response = await categoryService.create(req.body)
-    res.status(200).json({
-      response
-    })
-  } catch (error) {
-    next(error)
-  }
-})
+    try {
+      const response = await categoryService.create(req.body)
+      res.status(200).json({
+        response
+      })
+    } catch (error) {
+      next(error)
+    }
+  })
 // UPDATE  CATEGORY
 router.patch('/:id', validatorHandler(updateCategorySchema, 'body'),
   async (req, res, next) => {
-  try {
-    const response = await categoryService.update()
-    res.status(200).json({
-      response
-    })
-  } catch (error) {
-    next(error)
-  }
-})
+    try {
+      const response = await categoryService.update()
+      res.status(200).json({
+        response
+      })
+    } catch (error) {
+      next(error)
+    }
+  })
 // DELETE  CATEGORY
 router.patch('/', validatorHandler(deleteCategorySchema, 'params'),
   async (req, res, next) => {
-  try {
-    const response = await categoryService.delete()
-    res.status(200).json({
-      response
-    })
-  } catch (error) {
-    next(error)
-  }
-})
-
+    try {
+      const response = await categoryService.delete()
+      res.status(200).json({
+        response
+      })
+    } catch (error) {
+      next(error)
+    }
+  })
 
 module.exports = router

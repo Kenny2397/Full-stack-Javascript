@@ -61,8 +61,7 @@ router.post('/',
       res.status(200).json({
         response: newUser
       })
-    }
-    catch (error) {
+    } catch (error) {
       next(error)
     }
   })
@@ -89,18 +88,17 @@ router.delete('/:id',
   validatorHandler(getUserSchema, 'params'),
   async (req, res, next) => {
     try {
-      const { id } = req.params;
-      await userService.delete(id);
+      const { id } = req.params
+      await userService.delete(id)
       // console.log(id)
       res.status(200).json({
-        "message": "User removed",
+        message: 'User removed',
         id
-      });
+      })
     } catch (error) {
-      next(error);
+      next(error)
     }
   }
-);
-
+)
 
 module.exports = router

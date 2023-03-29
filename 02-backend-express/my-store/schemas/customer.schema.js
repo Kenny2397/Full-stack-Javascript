@@ -8,8 +8,6 @@ const lastName = Joi.string().min(3)
 const phone = Joi.number().integer().min(4)
 const userId = Joi.number().integer()
 
-
-
 const createCustomerSchema = Joi.object({
   name: name.required(),
   lastName: lastName.required(),
@@ -27,8 +25,8 @@ const createByIdUserCustomerSchema = Joi.object({
 const updateCustomerSchema = Joi.object({
   name: name.optional(),
   lastName: lastName.optional(),
-  phone: phone,
-  userId: userId
+  phone,
+  userId
 })
 
 const getCustomerSchema = Joi.object({

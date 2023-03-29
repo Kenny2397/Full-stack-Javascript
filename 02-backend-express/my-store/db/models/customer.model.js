@@ -1,7 +1,7 @@
-const { Model, DataTypes, Sequelize } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize')
 
 const { USER_TABLE } = require('./user.model')
-const CUSTOMER_TABLE = 'customers';
+const CUSTOMER_TABLE = 'customers'
 
 const CustomerSchema = {
   id: {
@@ -12,7 +12,7 @@ const CustomerSchema = {
   },
   name: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.STRING
   },
   lastName: {
     allowNull: false,
@@ -44,7 +44,7 @@ const CustomerSchema = {
 }
 
 class Customer extends Model {
-  static associate(models) {
+  static associate (models) {
     // associate
     this.belongsTo(models.User, { as: 'user' })
     this.hasMany(models.Order, {
@@ -53,7 +53,7 @@ class Customer extends Model {
     })
   }
 
-  static config(sequelize) {
+  static config (sequelize) {
     return {
       sequelize,
       tableName: CUSTOMER_TABLE,
@@ -62,6 +62,5 @@ class Customer extends Model {
     }
   }
 }
-
 
 module.exports = { CUSTOMER_TABLE, CustomerSchema, Customer }

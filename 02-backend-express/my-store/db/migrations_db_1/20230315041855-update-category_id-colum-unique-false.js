@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-const {DataTypes} = require('sequelize')
+const { DataTypes } = require('sequelize')
 
 const { PRODUCT_TABLE } = require('../models/product.model')
 
@@ -11,8 +11,8 @@ module.exports = {
       field: 'category_id',
       allowNull: false,
       type: DataTypes.INTEGER,
-      unique: false,
-    });
+      unique: false
+    })
   },
 
   async down (queryInterface, Sequelize) {
@@ -23,4 +23,4 @@ module.exports = {
      * await queryInterface.dropTable('users');
      */
   }
-};
+}

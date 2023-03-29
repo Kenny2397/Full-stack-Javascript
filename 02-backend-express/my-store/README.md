@@ -15,8 +15,11 @@ exit terminal: exit
 
 docker ps
 docker inspect IDIMAGE
+ 
+en settings -> eslint 
 
-realizar migracion de customer
-
+   "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    }
 
 

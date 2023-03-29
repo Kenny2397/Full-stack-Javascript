@@ -63,8 +63,7 @@ router.post('/',
       res.status(200).json({
         response: newCustomer
       })
-    }
-    catch (error) {
+    } catch (error) {
       next(error)
     }
   }
@@ -80,8 +79,7 @@ router.post('/id',
       res.status(200).json({
         response: newCustomer
       })
-    }
-    catch (error) {
+    } catch (error) {
       next(error)
     }
   }
@@ -109,18 +107,17 @@ router.delete('/:id',
   validatorHandler(getCustomerSchema, 'params'),
   async (req, res, next) => {
     try {
-      const { id } = req.params;
-      await customerService.delete(id);
+      const { id } = req.params
+      await customerService.delete(id)
       // console.log(id)
       res.status(200).json({
-        "message": "Customer removed",
+        message: 'Customer removed',
         id
-      });
+      })
     } catch (error) {
-      next(error);
+      next(error)
     }
   }
 )
-
 
 module.exports = router

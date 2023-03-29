@@ -16,30 +16,30 @@ const orderService = new OrderService()
 router.post('/',
   validatorHandler(createOrderSchema, 'body'),
   async (req, res, next) => {
-  try {
-    const response = await orderService.create(req.body)
-    res.status(200).json({
-      size: response.length,
-      response
-    })
-  } catch (error) {
-    next(error)
-  }
-})
+    try {
+      const response = await orderService.create(req.body)
+      res.status(200).json({
+        size: response.length,
+        response
+      })
+    } catch (error) {
+      next(error)
+    }
+  })
 
-// GET ORDERS
+// GET ORDER
 router.get('/:id',
   validatorHandler(getOrderSchema, 'params'),
   async (req, res, next) => {
-  try {
-    const response = await orderService.findOne(req.params.id)
-    res.status(200).json({
-      response
-    })
-  } catch (error) {
-    next(error)
-  }
-})
+    try {
+      const response = await orderService.findOne(req.params.id)
+      res.status(200).json({
+        response
+      })
+    } catch (error) {
+      next(error)
+    }
+  })
 
 // ALL ORDERS
 router.get('/', async (req, res, next) => {
@@ -49,8 +49,7 @@ router.get('/', async (req, res, next) => {
       size: orders.length || 0,
       data: orders
     })
-  }
-  catch(err) {
+  } catch (err) {
     next(err)
   }
 })
@@ -61,12 +60,12 @@ router.post('/add-item',
   validatorHandler(addItemSchema, 'body'),
   async (req, res, next) => {
     try {
-      const body = req.body;
-      const newItem = await orderService.addItem(body);
-      res.status(201).json(newItem);
+      const body = req.body
+      const newItem = await orderService.addItem(body)
+      res.status(201).json(newItem)
     } catch (error) {
-      next(error);
+      next(error)
     }
-})
+  })
 
 module.exports = router

@@ -20,40 +20,36 @@ const { validatorHandler } = require('./../middlewares/validator.handler')
 
 // middleware that is specific to this router
 router.use((req, res, next) => {
-  let now = moment()
+  const now = moment()
   console.log('Time: ', now.format('DD-MM-YYYY hh:mm:ss'))
   next()
 })
-
-
 
 router.get('/filter', async (req, res, next) => {
   const { size } = req.query
 
   res.status(200).json({
     data: {
-      size: size
+      size
     }
   })
   next()
 })
 
-
 // all of products
 router.get('/',
   validatorHandler(limitOffsetSchema, 'query'),
   async (req, res, next) => {
-  try {
-    const products = await productService.find(req.query)
-    res.status(200).json({
-      size: products.length || 0,
-      data: products
-    })
-  }
-  catch(err) {
-    next(err)
-  }
-})
+    try {
+      const products = await productService.find(req.query)
+      res.status(200).json({
+        size: products.length || 0,
+        data: products
+      })
+    } catch (err) {
+      next(err)
+    }
+  })
 
 // find product
 router.get('/:id',
@@ -65,8 +61,7 @@ router.get('/:id',
       res.status(200).json({
         data: product
       })
-    }
-    catch (err) {
+    } catch (err) {
       next(err)
     }
   })
@@ -82,8 +77,7 @@ router.post('/',
       res.status(201).json({
         data: newProduct
       })
-    }
-    catch (err) {
+    } catch (err) {
       next(err)
     }
   })
@@ -100,26 +94,25 @@ router.patch('/:id',
       res.json({
         data: updatedProduct
       })
-    }
-    catch (err) {
+    } catch (err) {
       next(err)
     }
   })
 
 // delete product
 router.delete('/:id', validatorHandler(deleteProductSchema, 'params'),
-async (req, res, next) => {
-  try {
-    const { id } = req.params
-    const index = await productService.delete(id, next)
-    res.json({
-      id: index
-    })
-  } catch (error) {
-    res.status(404).json({
-      message: error.message
-    })
-  }
-})
+  async (req, res, next) => {
+    try {
+      const { id } = req.params
+      const index = await productService.delete(id, next)
+      res.json({
+        id: index
+      })
+    } catch (error) {
+      res.status(404).json({
+        message: error.message
+      })
+    }
+  })
 
 module.exports = router

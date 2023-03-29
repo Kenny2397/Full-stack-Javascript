@@ -4,13 +4,12 @@ const pool = require('./../libs/postgres.pool')
 const { models } = require('./../libs/sequelize')
 
 class UserService {
-
-  constructor() {
+  constructor () {
     this.pool = pool
     this.pool.on('error', err => console.error(err))
   }
 
-  async create(body) {
+  async create (body) {
     const userEmail = body.email
 
     const userAlredyExist = await models.User.findOne({
@@ -18,7 +17,7 @@ class UserService {
         email: userEmail
       }
     })
-    console.log("***********" + userAlredyExist)
+    console.log('***********' + userAlredyExist)
     if (userAlredyExist !== null) {
       throw boom.conflict('User with email is already exist!')
     }
@@ -26,7 +25,7 @@ class UserService {
     return rta
   }
 
-  async find() {
+  async find () {
     // const query = 'SELECT * FROM TASKS'
     // const [data, metadata] = await sequelize.query(query)
     const rta = models.User.findAll({
@@ -35,7 +34,7 @@ class UserService {
     return rta
   }
 
-  async findOne(userId) {
+  async findOne (userId) {
     // const product = this.products.find(p => p.id === productId)
     // console.log(product)
     // if(!product){
@@ -45,14 +44,14 @@ class UserService {
     //   throw boom.conflict('El producto está bloqueado')
     // }
     const user = await models.User.findByPk(userId)
-    console.log("----" + user)
+    console.log('----' + user)
     if (!user) {
       throw boom.conflict('User not found!')
     }
     return user
   }
 
-  async update(userId, data) {
+  async update (userId, data) {
     // const productIndex = this.products.findIndex(p => p.id === productId)
     // // console.log(productIndex)
     // if (productIndex === -1) {
@@ -75,7 +74,7 @@ class UserService {
     return userUpdated
   }
 
-  async delete(userId) {
+  async delete (userId) {
     // const productIndex = this.products.findIndex(p => p.id = productId)
     // if (productIndex == -1) {
     //   throw boom.notFound('No se encontró producto')

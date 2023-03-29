@@ -1,11 +1,11 @@
-const { Model, DataTypes, Sequelize } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize')
 
-const { ORDER_TABLE } = require('./order.model');
-const { PRODUCT_TABLE } = require('./product.model');
+const { ORDER_TABLE } = require('./order.model')
+const { PRODUCT_TABLE } = require('./product.model')
 
-const ORDER_PRODUCT_TABLE = 'orders_products';
+const ORDER_PRODUCT_TABLE = 'orders_products'
 
-const OrderProductSchema =  {
+const OrderProductSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -16,7 +16,7 @@ const OrderProductSchema =  {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'created_at',
-    defaultValue: Sequelize.NOW,
+    defaultValue: Sequelize.NOW
   },
   amount: {
     allowNull: false,
@@ -47,12 +47,11 @@ const OrderProductSchema =  {
 }
 
 class OrderProduct extends Model {
-
-  static associate() {
+  static associate () {
     //
   }
 
-  static config(sequelize) {
+  static config (sequelize) {
     return {
       sequelize,
       tableName: ORDER_PRODUCT_TABLE,
@@ -62,4 +61,4 @@ class OrderProduct extends Model {
   }
 }
 
-module.exports = { OrderProduct, OrderProductSchema, ORDER_PRODUCT_TABLE };
+module.exports = { OrderProduct, OrderProductSchema, ORDER_PRODUCT_TABLE }

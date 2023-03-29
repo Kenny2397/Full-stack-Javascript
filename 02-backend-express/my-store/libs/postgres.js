@@ -1,12 +1,11 @@
 const { Client } = require('pg')
 
-
-async function getConnection(){
+async function getConnection () {
   const client = new Client({
     host: 'localhost',
-    port:5432,
-    user:'kenny',
-    password:'admin123',
+    port: 5432,
+    user: 'kenny',
+    password: 'admin123',
     database: 'my_store'
   })
   await client.connect()
@@ -14,4 +13,3 @@ async function getConnection(){
 }
 
 module.exports = getConnection
-

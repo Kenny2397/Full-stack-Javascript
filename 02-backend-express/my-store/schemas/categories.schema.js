@@ -8,21 +8,21 @@ const image = Joi.string()
 const createCategorySchema = Joi.object({
   title: title.required(),
   description: description.required(),
-  image: image
+  image
 })
 
 const findCategorySchema = Joi.object({
-  id: id.required(),
+  id: id.required()
 })
 const updateCategorySchema = Joi.object({
   id: id.required(),
   title: title.required(),
   description: description.required(),
-  image: image
+  image
 })
 
 const deleteCategorySchema = Joi.object({
-  id: id.required(),
+  id: id.required()
 })
 
 module.exports = {
@@ -31,6 +31,3 @@ module.exports = {
   deleteCategorySchema,
   findCategorySchema
 }
-
-
-

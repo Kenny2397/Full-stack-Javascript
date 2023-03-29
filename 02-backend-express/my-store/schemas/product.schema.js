@@ -15,30 +15,30 @@ const createProductSchema = Joi.object({
   description: description.required(),
   price: price.required(),
   image: image.required(),
-  offset: categoryId.required()
+  categoryId: categoryId.required()
 })
 
 const updateProductSchema = Joi.object({
   id: id.required(),
-  title: title,
-  description: description,
-  price: price,
-  image: image
+  title,
+  description,
+  price,
+  image,
+  categoryId
 })
 
 const findOneProductSchema = Joi.object({
-  id: id.required(),
+  id: id.required()
 })
 
 const deleteProductSchema = Joi.object({
-  id: id.required(),
+  id: id.required()
 })
 
-
 const limitOffsetSchema = Joi.object({
-  limit: limit,
-  offset: offset
-});
+  limit,
+  offset
+})
 
 module.exports = {
   createProductSchema,
@@ -47,4 +47,3 @@ module.exports = {
   deleteProductSchema,
   limitOffsetSchema
 }
-

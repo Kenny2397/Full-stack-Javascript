@@ -5,18 +5,8 @@ const boom = require('@hapi/boom')
 
 const { models } = require('./../libs/sequelize')
 class ProductService {
-
-  constructor() {
-    // this.products = []
-    // this.generate()
-    // this.pool = pool
-    // this.pool.on('error', (err) => {
-    //   console.error(err)
-    // })
-  }
-
-  generate() {
-    const limit = 100;
+  generate () {
+    const limit = 100
     for (let index = 0; index < limit; index++) {
       this.products.push({
         id: faker.datatype.uuid(),
@@ -28,41 +18,41 @@ class ProductService {
     }
   }
 
-  async create(data) {
-    const newProduct = await models.Product.create(data);
-    return newProduct;
+  async create (data) {
+    const newProduct = await models.Product.create(data)
+    return newProduct
   }
 
-  async find(query) {
+  async find (query) {
     const options = {
-      include: ['category'],
+      include: ['category']
     }
     const { limit, offset } = query
-    if ( limit && offset ) {
+    if (limit && offset) {
       options.limit = limit
       options.offset = offset
     }
     console.log(options)
-    const products = await models.Product.findAll(options);
-    return products;
+    const products = await models.Product.findAll(options)
+    return products
   }
 
-  async findOne(productId) {
+  async findOne (productId) {
     const product = this.products.find(p => p.id === productId)
     console.log(product)
-    if(!product){
+    if (!product) {
       throw boom.notFound('No se encontró el producto')
     }
-    if(product.isBlock){
+    if (product.isBlock) {
       throw boom.conflict('El producto está bloqueado')
     }
     return product
   }
 
-  async update(productId, data) {
+  async update (productId, data) {
     const productIndex = this.products.findIndex(p => p.id === productId)
     // console.log(productIndex)
-    if(productIndex === -1){
+    if (productIndex === -1) {
       throw boom.notFound('No se encontró el producto')
     }
     const product = this.products[productIndex]
@@ -74,13 +64,13 @@ class ProductService {
     return updatedProduct
   }
 
-  async delete(productId) {
-    const productIndex = this.products.findIndex(p => p.id = productId)
-    if(productIndex == -1){
+  async delete (productId) {
+    const productIndex = this.products.findIndex(p => p.id === productId)
+    if (productIndex === -1) {
       throw boom.notFound('No se encontró producto')
     }
     this.product.splice(productIndex, 1)
-    return {productIndex}
+    return { productIndex }
   }
 }
 

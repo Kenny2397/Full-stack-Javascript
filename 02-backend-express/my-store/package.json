@@ -7,6 +7,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "lint": "eslint",
+    "lint:format": "standard --fix",
     "migrations:generate": "sequelize-cli migration:generate --name",
     "migrations:run": "sequelize-cli db:migrate",
     "migrations:revert": "sequelize-cli db:migrate:undo",
@@ -16,9 +17,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^8.34.0",
+    "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.4",
     "sequelize-cli": "^6.6.0"
@@ -35,5 +40,8 @@
     "pg": "^8.9.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "6.29.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
   }
 }
