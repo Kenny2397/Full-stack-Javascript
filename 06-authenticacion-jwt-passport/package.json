@@ -1,28 +1,47 @@
 {
-  "name": "06-authenticacion-jwt-passport",
+  "name": "my-store",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {
-    "eslint-import-resolver-node": "^0.3.7",
-    "eslint-module-utils": "^2.8.0",
-    "eslint-plugin-es": "^4.1.0",
-    "eslint-scope": "^7.2.0",
-    "eslint-utils": "^3.0.0",
-    "eslint-visitor-keys": "^3.4.0",
-    "pnpm": "^8.3.1"
-  },
-  "devDependencies": {
-    "eslint": "^8.39.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.7.0",
-    "eslint-plugin-promise": "^6.1.1"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --watch index.js",
+    "dev": "nodemon index.js",
+    "lint": "eslint",
+    "lint:format": "standard --fix",
+    "migrations:generate": "sequelize-cli migration:generate --name",
+    "migrations:run": "sequelize-cli db:migrate",
+    "migrations:revert": "sequelize-cli db:migrate:undo",
+    "migrations:delete": "sequelize-cli db:migrate:undo:all"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.4",
+    "sequelize-cli": "^6.6.0"
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "faker": "^5.5.3",
+    "joi": "^17.7.1",
+    "moment": "^2.29.4",
+    "mysql2": "^3.2.0",
+    "pg": "^8.9.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "6.29.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  }
 }
