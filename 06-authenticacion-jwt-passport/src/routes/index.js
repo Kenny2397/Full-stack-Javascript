@@ -1,4 +1,5 @@
 const express = require('express')
+const { checkApiKey } = require('./../middlewares/auth.handler')
 
 const productsRouter = require('./products.routes')
 const usersRouter = require('./users.routes')
@@ -8,7 +9,10 @@ const ordersRouter = require('./orders.routes')
 
 function RouterApi (app) {
   const router = express.Router()
-  app.use('/api/v1', router)
+  app.use('/api/v1',
+    checkApiKey,
+    router
+  )
 
   router.use('/products', productsRouter)
   router.use('/users', usersRouter)
